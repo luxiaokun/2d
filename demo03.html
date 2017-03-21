@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+		.click{
+			width: 300px;
+			height: 300px;
+			border: 2px solid #808080;
+			border-radius:50% ;
+			margin: auto;
+			position: fixed;
+			top: 0;left: 0;right: 0;bottom: 0;
+			background: radial-gradient(#fff,#eee);
+			box-shadow: 0 0 5px gray;
+			background-image: url(nature-1283010_1280.jpg);
+		}
+	</style>
+	<script>
+	window.onload=function(){
+		var one=document.getElementsByClassName("click")[0];
+		
+		var time=new Date();
+		var hours=time.getHours();
+		var mins=time.getMinutes()
+		var secs=time.getSeconds()
+		
+		function creat(){			
+			for(var i=0;i<60;i++){
+				var widtha;
+				var heighta;
+				if(i%5==0){
+					widtha=4+"px";
+					heighta=10+"px"
+				}else{
+					widtha=2+"px";
+					heighta=6+"px"
+				}
+				var div=document.createElement("div");
+				div.style.cssText="width:"+widtha+";height:"+heighta+";background:red;position: absolute;left:147px;top:0"
+				div.style.transformOrigin="center 150px";
+				div.style.transform="rotate("+i*6+"deg)";
+				one.appendChild(div);
+			}			
+		}
+		creat();
+		
+		function pos(w,h,c,r){
+			var div=document.createElement("div");
+			div.style.cssText="width:"+w+"px;height:"+h+"px;background:"+c+";position: absolute;left:"+(300-w)/2+"px;top:"+(150-h)+"px;"
+			div.style.transformOrigin="center "+h+"px";
+			div.style.transform="rotate("+r+"deg)";
+			one.appendChild(div);
+			return div;
+		}
+		var hs=pos(6,40,"yellow",hours*30+mins*6/12);
+		var ms=pos(4,60,"blue",mins*6);
+		var ss=pos(2,100,"red",secs*6);
+		
+		setInterval(function(){
+			var time=new Date();
+			var hours=time.getHours();
+			var mins=time.getMinutes()
+			var secs=time.getSeconds()
+			hs.style.transform="rotate("+hours*30+"+"+mins*6/12+"deg)";
+			ms.style.transform="rotate("+mins*6+"deg)";
+			ss.style.transform="rotate("+secs*6+"deg)";
+		},1000)
+	}
+		
+	</script>
+	<body>
+		<div class="click"></div>
+	</body>
+</html>
